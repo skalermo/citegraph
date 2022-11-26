@@ -7,7 +7,7 @@ from xml.sax.saxutils import escape as xml_escape
 import graphviz as g
 import yaml
 
-from citegraph.model import Biblio, Paper, Person, PaperAndRefs, PaperId
+from src.citegraph.model import Biblio, Paper, Person, PaperAndRefs, PaperId
 
 UNKNOWN_PERSON = Person(string="Unknown von Unknown")
 
@@ -67,7 +67,7 @@ class StylingInfo(object):
 
         if filename:
             with open(filename) as file:
-                doc = yaml.load(file)
+                doc = yaml.safe_load(file)
                 self.categorize(doc)
 
     def add_tag(self, name, attrs, selector_fun):

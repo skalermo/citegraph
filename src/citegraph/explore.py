@@ -1,8 +1,8 @@
 from typing import Optional, NamedTuple, Set
 
-from citegraph.draw import Graph
-from citegraph.model import Biblio, Paper, PaperId
-from citegraph.semapi import PaperDb, PaperAndRefs
+from src.citegraph.draw import Graph
+from src.citegraph.model import Biblio, Paper, PaperId
+from src.citegraph.semapi import PaperDb, PaperAndRefs
 
 
 class Params(NamedTuple):
@@ -72,10 +72,13 @@ class Params(NamedTuple):
 
     """
 
-    distance_penalty: float = 0.2
-    degree_cut: int = 3  # > 0
-    clustering_factor: float = 0.5  # > 0
-    api_weight: float = 1  # > 0
+    # distance_penalty: float = 0.2
+    distance_penalty: float = 0.6
+    # degree_cut: int = 3  # > 0
+    degree_cut: int = 5  # > 0
+    # clustering_factor: float = 0.5  # > 0
+    clustering_factor: float = 0.9  # > 0
+    api_weight: float = 1.5  # > 0
 
     api_failure_limit: int = 10
     max_graph_size: int = 80
@@ -234,7 +237,8 @@ def smart_fetch(seeds: Set[PaperId],
 
         for (citing, is_influential) in sorted(cur.citations, key=lambda c: c.paper.id):
             nodes[citing.id] = citing
-            if add_ref(citing, cur, is_influential) and params.consider_upward_links:
+            # if add_ref(citing, cur, is_influential) and params.consider_upward_links:
+            if params.consider_upward_links and add_ref(citing, cur, is_influential):
                 # only if we really added the ref
                 update_distances(citing, cur)
 

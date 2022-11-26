@@ -4,7 +4,7 @@ from typing import Dict, Optional, List, Iterable
 import semanticscholar
 import requests.exceptions
 
-from citegraph.model import *
+from src.citegraph.model import *
 
 API_URL = 'http://api.semanticscholar.org/v1'
 

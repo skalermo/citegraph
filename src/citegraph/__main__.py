@@ -3,11 +3,11 @@ from pathlib import Path
 
 import os
 
-from citegraph.draw import DotGraphRenderer, GephiGraphRenderer, StylingInfo, SUPPORTED_FORMATS
-from citegraph.explore import Params
-from citegraph.explore import smart_fetch as create_graph
-from citegraph.model import Biblio
-from citegraph.semapi import PaperDb
+from src.citegraph.draw import DotGraphRenderer, GephiGraphRenderer, StylingInfo, SUPPORTED_FORMATS
+from src.citegraph.explore import Params
+from src.citegraph.explore import smart_fetch as create_graph
+from src.citegraph.model import Biblio
+from src.citegraph.semapi import PaperDb
 
 DEFAULT_FORMAT = "pdf"
 DB_LOC_VAR = "CITEGRAPH_DB"
