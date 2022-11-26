@@ -122,8 +122,10 @@ class PaperDb(object):
 
         def cite_update(dict, is_references):
             for ref in dict:
+                if ref['paperId'] is None:
+                    continue
                 ref_id = self._internalize_id(ref["paperId"])
-                is_influential = ref["isInfluential"]
+                is_influential = ref.get("isInfluential", False)
                 if is_references:
                     cites.append((internal_id, ref_id, is_influential))
                 else:
@@ -160,7 +162,7 @@ class PaperDb(object):
             return found
 
         try:
-            paper_dict: Dict = semanticscholar.paper(paper_id)
+            paper_dict: Dict = semanticscholar.SemanticScholar().paper(paper_id)
             error = len(paper_dict.keys()) == 0
         except requests.exceptions.RequestException as e:
             print(f"[ERROR] {str(e)}")
